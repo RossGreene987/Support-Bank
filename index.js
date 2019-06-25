@@ -2,7 +2,8 @@ const fs = require('fs');
 const readline = require('readline-sync');
 
 class person{
-    constructor(assets) {
+    constructor(name, assets) {
+        this.name = name
         this.assets = assets
     }
 }
@@ -100,15 +101,71 @@ function CSVToArray( strData, strDelimiter ){
     return( arrData );
 }
 
-function setup(filename){
-    let data = fs.readFileSync(filename, 'utf8');
-    let transactionsList = []
-    data  = CSVToArray(data);
-    data.forEach(function(element) {
-        transactionsList.push(new transaction(null, element))
-    });
-    console.log(transactionsList);
+function newTransaction(array){
+    let date = array[0];
+    let from = array[1];
+    let to = array[2];
+    let narrative = array[3];
+    let amount = +array[4];
+    return new transaction(date, from, to, narrative, amount)
 }
 
+function getTransactionList(filename){
+    let data = fs.readFileSync(filename, 'utf8');
+    let transactionList = [];
+    data  = CSVToArray(data);
+    data.forEach(function(element) {
+        transactionList.push(newTransaction(element))
+    });
+    return transactionList
 
-setup('Transactions2014.csv')
+}
+
+function isInPopulation(name, population){
+    let isin = false;
+    population.forEach(function(element) {
+        if (element.name == name){
+            isin = true
+        }; });
+    return isin
+}
+
+function indexOf(name, population){
+    let index = 0
+    for(let i=0; i < population.length; i++){
+        if (population[i].name == name){
+            index = i
+        }
+    }
+    return index
+}
+
+function listAll(){
+    let transactionList = getTransactionList('Transactions2014.csv');
+    transactionList.shift();
+    transactionList.pop();
+    let population = [];
+    transactionList.forEach(function(element) {
+        console.log(element);
+
+        if (!isInPopulation(element.from,population)){
+            population.push(new person(element.from,0))
+        }
+        if (!isInPopulation(element.to,population)){
+            population.push(new person(element.to,0))
+        }
+        let fromIndex = indexOf(element.from, population);
+        let toIndex = indexOf(element.to, population);
+        population[fromIndex].assets -= element.amount;
+        population[toIndex].assets += element.amount;
+
+        console.log(population)
+    });
+
+    console.log(population);
+
+}
+
+listAll();
+
+
