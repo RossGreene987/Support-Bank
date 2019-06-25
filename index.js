@@ -117,6 +117,8 @@ function getTransactionList(filename){
     data.forEach(function(element) {
         transactionList.push(newTransaction(element))
     });
+    transactionList.shift();
+    transactionList.pop();
     return transactionList
 
 }
@@ -142,8 +144,7 @@ function indexOf(name, population){
 
 function listAll(){
     let transactionList = getTransactionList('Transactions2014.csv');
-    transactionList.shift();
-    transactionList.pop();
+
     let population = [];
     transactionList.forEach(function(element) {
         console.log(element);
@@ -166,6 +167,16 @@ function listAll(){
 
 }
 
-listAll();
+function list(name){
+    let transactionList = getTransactionList('Transactions2014.csv');
+    let myTransactions = transactionList.filter(function(item) {
+        return (item.from == name || item.to == name) ;
+    });
+    console.log( myTransactions )
+}
+
+//listAll();
+list('Todd')
+
 
 
