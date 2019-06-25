@@ -20,6 +20,7 @@
     "file-system": "^2.2.2",
     "fs": "0.0.1-security",
     "jquery-csv": "^1.0.3",
+    "log4js": "^4.3.2",
     "papaparse": "^5.0.0",
     "readline-sync": "^1.4.9"
   }

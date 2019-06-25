@@ -1,20 +1,35 @@
 const fs = require('fs');
 const readline = require('readline-sync');
 
+const log4js = require('log4js');
+
+log4js.configure({
+    appenders: {
+        file: { type: 'fileSync', filename: 'DebugLog' }
+    },
+    categories: {
+        default: { appenders: ['file'], level: 'debug'}
+    }
+});
+
+const logger = log4js.getLogger()
+logger.debug("Hello")
+
 class person{
     constructor(name, assets) {
-        this.name = name
-        this.assets = assets
+        this.name = name;
+        this.assets = assets;
     }
 }
 
+
 class transaction{
     constructor(date, from, to, narrative, amount){
-        this.date = date
-        this.from = from
-        this.to = to
-        this.narrative = narrative
-        this.amount = amount
+        this.date = date;
+        this.from = from;
+        this.to = to;
+        this.narrative = narrative;
+        this.amount = amount;
     }
 }
 
@@ -126,28 +141,32 @@ function getTransactionList(filename){
 function isInPopulation(name, population){
     let isin = false;
     population.forEach(function(element) {
-        if (element.name == name){
+        if (element.name === name) {
             isin = true
-        }; });
+        }
+    });
     return isin
 }
 
 function indexOf(name, population){
-    let index = 0
-    for(let i=0; i < population.length; i++){
-        if (population[i].name == name){
-            index = i
-        }
-    }
-    return index
+    // let index = 0;
+    // for(let i=0; i < population.length; i++) {
+    //     if (population[i].name === name){
+    //         index = i;
+    //     }
+    // }
+    // return index;
+
+    return population.findIndex((person) => {
+        return person.name === name;
+    })
 }
 
-function listAll(){
-    let transactionList = getTransactionList('Transactions2014.csv');
+function listAll(file){
+    let transactionList = getTransactionList(file);
 
     let population = [];
     transactionList.forEach(function(element) {
-        console.log(element);
 
         if (!isInPopulation(element.from,population)){
             population.push(new person(element.from,0))
@@ -160,23 +179,28 @@ function listAll(){
         population[fromIndex].assets -= element.amount;
         population[toIndex].assets += element.amount;
 
-        console.log(population)
     });
 
     console.log(population);
 
 }
 
-function list(name){
-    let transactionList = getTransactionList('Transactions2014.csv');
+function list(name, file){
+    let transactionList = getTransactionList(file);
     let myTransactions = transactionList.filter(function(item) {
-        return (item.from == name || item.to == name) ;
+        return (item.from === name || item.to === name);
     });
     console.log( myTransactions )
 }
 
-//listAll();
-list('Todd')
+
+
+listAll('DodgyTransactions2015.csv');
+list('Todd', 'DodgyTransactions2015.csv');
+
+
+
+
 
 
 
