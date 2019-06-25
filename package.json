@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/RossGreene987/Support-Bank/issues"
   },
-  "homepage": "https://github.com/RossGreene987/Support-Bank#readme"
+  "homepage": "https://github.com/RossGreene987/Support-Bank#readme",
+  "dependencies": {
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
+    "jquery-csv": "^1.0.3",
+    "papaparse": "^5.0.0",
+    "readline-sync": "^1.4.9"
+  }
 }
