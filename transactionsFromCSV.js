@@ -2,18 +2,18 @@ const readline = require('readline-sync');
 const fs = require('fs');
 const moment = require('moment');
 moment().format();
+const verify = require('./verifyData');
 
-class transaction{
+class Transaction{
     constructor(date, from, to, narrative, amount){
-        this.date = date;
-        this.from = from;
-        this.to = to;
-        this.narrative = narrative;
-        this.amount = amount;
+        this.Date = date;
+        this.FromAccount = from;
+        this.ToAccount = to;
+        this.Narrative = narrative;
+        this.Amount = amount;
     }
 }
 
-const verify = require('./verifyData');
 
 
 function newTransaction(array){
@@ -24,13 +24,13 @@ function newTransaction(array){
         let to = array[2];
         let narrative = array[3];
         let amount = +array[4];
-        return new transaction(date, from, to, narrative, amount)
+        return new Transaction(date, from, to, narrative, amount)
     }
     return 'bad'
 }
 
 
-function getTransactionList(filename){
+function getTransactionListCSV(filename){
     let data = fs.readFileSync(filename, 'utf8');
     let transactionList = [];
     data  = CSVToArray(data);
@@ -47,11 +47,11 @@ function getTransactionList(filename){
 }
 
 function CSVToArray( strData, strDelimiter ){
-    // Check to see if the delimiter is defined. If not,
-    // then default to comma.
+    // Check ToAccount see if the delimiter is defined. If not,
+    // then default ToAccount comma.
     strDelimiter = (strDelimiter || ",");
 
-    // Create a regular expression to parse the CSV values.
+    // Create a regular expression ToAccount parse the CSV values.
     let objPattern = new RegExp(
         (
             // Delimiters.
@@ -67,11 +67,11 @@ function CSVToArray( strData, strDelimiter ){
     );
 
 
-    // Create an array to hold our data. Give the array
+    // Create an array ToAccount hold our data. Give the array
     // a default empty first row.
     var arrData = [[]];
 
-    // Create an array to hold our individual pattern
+    // Create an array ToAccount hold our individual pattern
     // matching groups.
     var arrMatches = null;
 
@@ -83,7 +83,7 @@ function CSVToArray( strData, strDelimiter ){
         // Get the delimiter that was found.
         var strMatchedDelimiter = arrMatches[ 1 ];
 
-        // Check to see if the given delimiter has a length
+        // Check ToAccount see if the given delimiter has a length
         // (is not the start of string) and if it matches
         // field delimiter. If id does not, then we know
         // that this delimiter is a row delimiter.
@@ -93,7 +93,7 @@ function CSVToArray( strData, strDelimiter ){
         ){
 
             // Since we have reached a new row of data,
-            // add an empty row to our data array.
+            // add an empty row ToAccount our data array.
             arrData.push( [] );
 
         }
@@ -101,7 +101,7 @@ function CSVToArray( strData, strDelimiter ){
         var strMatchedValue;
 
         // Now that we have our delimiter out of the way,
-        // let's check to see which kind of value we
+        // let's check ToAccount see which kind of value we
         // captured (quoted or unquoted).
         if (arrMatches[ 2 ]){
 
@@ -121,7 +121,7 @@ function CSVToArray( strData, strDelimiter ){
 
 
         // Now that we have our value string, let's add
-        // it to the data array.
+        // it ToAccount the data array.
         arrData[ arrData.length - 1 ].push( strMatchedValue );
     }
 
@@ -129,5 +129,5 @@ function CSVToArray( strData, strDelimiter ){
     return( arrData );
 }
 
-exports.getTransactionList = getTransactionList;
+exports.getTransactionListCSV = getTransactionListCSV;
 

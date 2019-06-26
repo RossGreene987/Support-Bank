@@ -1,17 +1,14 @@
 
 const readline = require('readline-sync');
 const getCSV = require('./transactionsFromCSV')
-
+const getJSON = require('./transactionsFromJSON')
 
 class Person{
     constructor(name, assets) {
         this.name = name;
         this.assets = assets;
-        Person.population.push(this);
-        Person.population++;
     }
 }
-
 
 function isInPopulation(name, population){
     let isin = false;
@@ -24,56 +21,53 @@ function isInPopulation(name, population){
 }
 
 function indexOf(name, population){
-    // let index = 0;
-    // for(let i=0; i < population.length; i++) {
-    //     if (population[i].name === name){
-    //         index = i;
-    //     }
-    // }
-    // return index;
-
     return population.findIndex((person) => {
         return person.name === name;
     })
 }
 
-function listAll(file){
-    let transactionList =getCSV.getTransactionList(file);
-
+function getPopulationFromTransactions(transactionList) {
     let population = [];
-    transactionList.forEach(function(element) {
-
-        if (!isInPopulation(element.from,population)){
-            population.push(new Person(element.from,0))
+    transactionList.forEach(function (element) {
+        if (!isInPopulation(element.FromAccount, population)) {
+            population.push(new Person(element.FromAccount, 0))
         }
-        if (!isInPopulation(element.to,population)){
-            population.push(new Person(element.to,0))
+        if (!isInPopulation(element.ToAccount, population)) {
+            population.push(new Person(element.ToAccount, 0))
         }
-        let fromIndex = indexOf(element.from, population);
-        let toIndex = indexOf(element.to, population);
-        population[fromIndex].assets -= element.amount;
-        population[toIndex].assets += element.amount;
-
+        let fromIndex = indexOf(element.FromAccount, population);
+        let toIndex = indexOf(element.ToAccount, population);
+        population[fromIndex].assets -= element.Amount;
+        population[toIndex].assets += element.Amount;
     });
+    return population;
+}
+
+function listAll(file){
+    let transactionList = getTransactionList(file);
+    let population = getPopulationFromTransactions(transactionList);
     console.log(population);
 }
 
+function getTransactionList(file) {
+    let filename = file
+    let transactionList;
+    if (filename.slice(-3) === 'csv') {
+        transactionList = getCSV.getTransactionListCSV(file);
+    } else if (filename.slice(-4) === 'json') {
+        transactionList = getJSON.getTransactionListJSON(file);
+    }
+    return transactionList
+}
+
 function list(name, file){
-    let transactionList = getCSV.getTransactionList(file);
+    let transactionList = getTransactionList(file);
+
     let myTransactions = transactionList.filter(function(item) {
-        return (item.from === name || item.to === name);
+        return (item.FromAccount === name || item.ToAccount === name);
     });
     console.log( myTransactions )
 }
 
-
-listAll('DodgyTransactions2015.csv');
-list('Todd', 'DodgyTransactions2015.csv');
-console.log("This: " + Person.population);
-
-
-
-
-
-
-
+listAll('Transactions2013.json');
+list('Todd', 'Transactions2013.json');

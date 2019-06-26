@@ -1,5 +1,4 @@
 const log4js = require('log4js');
-
 const logger = log4js.getLogger();
 
 log4js.configure({
@@ -12,9 +11,6 @@ log4js.configure({
 });
 
 function checkArray(array){
-
-
-
     if(!checkDate(array[0])){
         logger.error(`Date not parsed, not in correct format. Transaction ${array} has not been added
         `);
