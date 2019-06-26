@@ -14,8 +14,6 @@ class Transaction{
     }
 }
 
-
-
 function newTransaction(array){
     if(verify.checkArray(array)){
         let date = array[0];
@@ -28,7 +26,6 @@ function newTransaction(array){
     }
     return 'bad'
 }
-
 
 function getTransactionListCSV(filename){
     let data = fs.readFileSync(filename, 'utf8');

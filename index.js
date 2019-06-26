@@ -1,7 +1,6 @@
-
-const readline = require('readline-sync');
 const getCSV = require('./transactionsFromCSV')
 const getJSON = require('./transactionsFromJSON')
+const getXML = require('./transactionsFromXML')
 
 class Person{
     constructor(name, assets) {
@@ -50,17 +49,19 @@ function listAll(file){
 }
 
 function getTransactionList(file) {
-    let filename = file
+    let filename = file;
     let transactionList;
     if (filename.slice(-3) === 'csv') {
         transactionList = getCSV.getTransactionListCSV(file);
     } else if (filename.slice(-4) === 'json') {
         transactionList = getJSON.getTransactionListJSON(file);
+    } else if (filename.slice(-3) === 'xml') {
+        transactionList = getXML.getTransactionListXML(file)
     }
-    return transactionList
+    return transactionList;
 }
-
 function list(name, file){
+
     let transactionList = getTransactionList(file);
 
     let myTransactions = transactionList.filter(function(item) {
@@ -69,5 +70,6 @@ function list(name, file){
     console.log( myTransactions )
 }
 
-listAll('Transactions2013.json');
-list('Todd', 'Transactions2013.json');
+getTransactionList('Transactions2012.xml')
+// listAll('Transactions2012.xml');
+// list('Todd', 'Transactions2012.xml');

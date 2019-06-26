@@ -14,7 +14,6 @@ function checkArray(array){
     if(!checkDate(array[0])){
         logger.error(`Date not parsed, not in correct format. Transaction ${array} has not been added
         `);
-
         return false
     }
     if(!checkAmount(array[4])){

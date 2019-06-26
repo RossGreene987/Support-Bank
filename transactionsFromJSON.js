@@ -11,3 +11,4 @@ function getTransactionListJSON(file){
 }
 
 exports.getTransactionListJSON = getTransactionListJSON;
+
