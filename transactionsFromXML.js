@@ -4,10 +4,15 @@ const parseString = require('xml2js').parseString;
 
 function getTransactionListXML(file){
     let data = fs.readFileSync(file, 'utf8');
-    parseString(data, function (err, result) {
+
+    // data = parseString(data);
+
+    data = parseString(data, function (err, result) {
         console.dir(result);
     });
-    //console.log(data);
+
+    console.log(data);
+
     return data
 }
 

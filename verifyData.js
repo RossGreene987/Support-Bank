@@ -18,7 +18,7 @@ function checkArray(array){
     }
     if(!checkAmount(array[4])){
         logger.error( `Transaction ${array} has not been processed
-        `)
+        `);
         return false
     }
     return true
