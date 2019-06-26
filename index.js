@@ -1,19 +1,12 @@
 const fs = require('fs');
 const readline = require('readline-sync');
+const moment = require('moment');
+moment().format();
+const verify = require('./verifyData')
 
-const log4js = require('log4js');
 
-log4js.configure({
-    appenders: {
-        file: { type: 'fileSync', filename: 'DebugLog' }
-    },
-    categories: {
-        default: { appenders: ['file'], level: 'debug'}
-    }
-});
 
-const logger = log4js.getLogger()
-logger.debug("Hello")
+
 
 class person{
     constructor(name, assets) {
@@ -39,7 +32,7 @@ function CSVToArray( strData, strDelimiter ){
     strDelimiter = (strDelimiter || ",");
 
     // Create a regular expression to parse the CSV values.
-    var objPattern = new RegExp(
+    let objPattern = new RegExp(
         (
             // Delimiters.
             "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
@@ -117,25 +110,33 @@ function CSVToArray( strData, strDelimiter ){
 }
 
 function newTransaction(array){
-    let date = array[0];
-    let from = array[1];
-    let to = array[2];
-    let narrative = array[3];
-    let amount = +array[4];
-    return new transaction(date, from, to, narrative, amount)
+    if(verify.checkArray(array)){
+        let date = array[0];
+        date = moment(date, "DD/MM/YYYY");
+        let from = array[1];
+        let to = array[2];
+        let narrative = array[3];
+        let amount = +array[4];
+        return new transaction(date, from, to, narrative, amount)
+    }
+    return 'bad'
 }
+
 
 function getTransactionList(filename){
     let data = fs.readFileSync(filename, 'utf8');
     let transactionList = [];
     data  = CSVToArray(data);
+    data.shift();
+    data.pop();
     data.forEach(function(element) {
-        transactionList.push(newTransaction(element))
+        let nextTransaction = newTransaction(element)
+        if (!(nextTransaction === 'bad')){
+            transactionList.push(nextTransaction)
+        }
     });
-    transactionList.shift();
-    transactionList.pop();
-    return transactionList
 
+    return transactionList
 }
 
 function isInPopulation(name, population){
