@@ -32,3 +32,38 @@
         
 [2019-06-26T11:25:39.000] [ERROR] default - Date not parsed, not in correct format. Transaction Last Thursday,Sarah T,Dan W,Beers,5.42 has not been added
         
+[2019-06-26T11:55:05.012] [ERROR] default - Amount is not a positive number
+[2019-06-26T11:55:05.016] [ERROR] default - Transaction 01/03/2015,Ben B,Sam N,Lunch,One Cheeseburger has not been processed
+        
+[2019-06-26T11:55:05.019] [ERROR] default - Date not parsed, not in correct format. Transaction Last Thursday,Sarah T,Dan W,Beers,5.42 has not been added
+        
+[2019-06-26T11:55:05.028] [ERROR] default - Amount is not a positive number
+[2019-06-26T11:55:05.029] [ERROR] default - Transaction 01/03/2015,Ben B,Sam N,Lunch,One Cheeseburger has not been processed
+        
+[2019-06-26T11:55:05.031] [ERROR] default - Date not parsed, not in correct format. Transaction Last Thursday,Sarah T,Dan W,Beers,5.42 has not been added
+        
+[2019-06-26T11:56:32.818] [ERROR] default - Amount is not a positive number
+[2019-06-26T11:56:32.821] [ERROR] default - Transaction 01/03/2015,Ben B,Sam N,Lunch,One Cheeseburger has not been processed
+        
+[2019-06-26T11:56:32.823] [ERROR] default - Date not parsed, not in correct format. Transaction Last Thursday,Sarah T,Dan W,Beers,5.42 has not been added
+        
+[2019-06-26T12:30:55.121] [ERROR] default - Amount is not a positive number
+[2019-06-26T12:30:55.124] [ERROR] default - Transaction 01/03/2015,Ben B,Sam N,Lunch,One Cheeseburger has not been processed
+        
+[2019-06-26T12:30:55.126] [ERROR] default - Date not parsed, not in correct format. Transaction Last Thursday,Sarah T,Dan W,Beers,5.42 has not been added
+        
+[2019-06-26T13:44:11.120] [ERROR] default - Amount is not a positive number
+[2019-06-26T13:44:11.124] [ERROR] default - Transaction 01/03/2015,Ben B,Sam N,Lunch,One Cheeseburger has not been processed
+        
+[2019-06-26T13:44:11.128] [ERROR] default - Date not parsed, not in correct format. Transaction Last Thursday,Sarah T,Dan W,Beers,5.42 has not been added
+        
+[2019-06-26T13:45:48.717] [ERROR] default - Amount is not a positive number
+[2019-06-26T13:45:48.721] [ERROR] default - Transaction 01/03/2015,Ben B,Sam N,Lunch,One Cheeseburger has not been processed
+        
+[2019-06-26T13:45:48.723] [ERROR] default - Date not parsed, not in correct format. Transaction Last Thursday,Sarah T,Dan W,Beers,5.42 has not been added
+        
+[2019-06-26T13:45:48.733] [ERROR] default - Amount is not a positive number
+[2019-06-26T13:45:48.733] [ERROR] default - Transaction 01/03/2015,Ben B,Sam N,Lunch,One Cheeseburger has not been processed
+        
+[2019-06-26T13:45:48.735] [ERROR] default - Date not parsed, not in correct format. Transaction Last Thursday,Sarah T,Dan W,Beers,5.42 has not been added
+        
